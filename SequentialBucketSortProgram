@@ -1,0 +1,49 @@
+package bucketSort;
+
+import java.util.Random;
+
+public class BucketSort {
+	   public static void main(String[] args) {
+		      int dataSetSize = 10000000;
+		      int [] data= getRendomArray(dataSetSize);
+
+		      long startTime = System.currentTimeMillis();
+		      sort(data,dataSetSize);
+		      long stopTime = System.currentTimeMillis();
+		      long elapsedTime = stopTime - startTime;
+
+		      System.out.println("Data Set Size : " + dataSetSize);
+		      System.out.println("Time Spent(ms) : " + elapsedTime);
+		   }
+
+	   public static void sort(int[] a, int maxVal) {
+		      int [] bucket=new int[maxVal+1];
+
+		      for (int i=0; i<bucket.length; i++) {
+		         bucket[i]=0;
+		      }
+
+		      for (int i=0; i<a.length; i++) {
+		         bucket[a[i]]++;
+		      }
+
+		      int outPos=0;
+		      for (int i=0; i<bucket.length; i++) {
+		         for (int j=0; j<bucket[i]; j++) {
+		            a[outPos++]=i;
+		         }
+		      }
+	   }
+
+	  public static int[] getRendomArray(int size) {
+		    Random r = new Random();
+
+		    // generate a uniformly distributed int random numbers
+		    int[] integers = new int[size];
+		    for (int i = 0; i < integers.length; i++) {
+		      integers[i] = r.nextInt(size) + 1;
+		    }
+
+		    return integers;
+	  }
+}
